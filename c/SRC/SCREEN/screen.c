@@ -1,38 +1,44 @@
 #include "screen.h"
 
-void		up_cross(vec dest, vec v)
+static void	set_origin(vec origin, double w, double h,
+						t_camera *camera)
 {
-	vec	temp;
-
-	vzero(temp);
-	temp[Z] = 1.;
-	cross(dest, temp, v);
+	origin[X] = camera->pos[X] - w * camera->u[X]
+				 - h * camera->v[X] - camera->w[X];
+	origin[Y] = camera->pos[Y] - w * camera->u[Y]
+				 - h * camera->v[Y] - camera->w[Y];
+	origin[Z] = camera->pos[Z] - w * camera->u[Z]
+				 - h * camera->v[Z] - camera->w[Z];
 }
 
-t_screen	*set_screen(t_screen *screen,
-							vec origin, vec dir, double fov)
+void		set_screen_vector(t_screen *screen, t_camera *camera)
 {
-	double hh = tan(fov / 2);
-	double hw = hh *
-		((double)screen->width / (double)screen->height);
-	vec w, u, v;
-	vneg(w, dir);
-	up_cross(u, w);
-	cross(v, w, u);
+	double	w;
+	double	h;
 	
-
+	w = tan(camera->fov / 2);
+	h = w * (double)screen->height / (double)screen-> width;
+	set_origin(screen->origin, w, h, camera);
+	vmultiple(screen->horizontal, camera->u, 2. * w);
+	vmultiple(screen->vertical, camera->v, 2. * h);
 }
 
-t_screen	*init_screen(double width, double height)
+t_screen	*init_screen(t_camera *camera)
 {
 	t_screen	*screen;
 
 	if (!(screen = malloc(sizeof(t_screen))))
 		return (NULL);
-	screen->width = width;
-	screen->height = height;
-	vzero(screen->origin);
-	vzero(screen->vertical);
-	vzero(screen->horizontal);
+	screen->width = INIT_W;
+	screen->height = INIT_H;
+	set_screen_vector(screen, camera);
 	return (screen);
 }
+
+void		set_screen_wh(t_screen *screen,
+						int width, int height)
+{
+	screen->width = width;
+	screen->height = height;
+}
+

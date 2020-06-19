@@ -8,4 +8,8 @@
 
 # define PI 3.1415926535
 
+# define INIT_W 640
+# define INIT_H 480
+# define INIT_FOV 60
+
 #endif

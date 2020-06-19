@@ -14,6 +14,9 @@ typedef struct	s_screen
 	vec			horizontal;
 }				t_screen;
 
-t_screen	*init_screen(double width, double height);
+t_screen	*init_screen();
+void		set_screen_wh(t_screen *screen,
+						int width, int height);
+void		set_screen_vector(t_screen *screen, t_camera *camera);
 
 #endif

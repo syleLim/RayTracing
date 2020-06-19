@@ -13,7 +13,9 @@ typedef struct	s_light
 	double		ambient;
 }				t_light;
 
-t_light		*init_light(vec pos, double intensity,
-							double ambient);
+t_light	*init_light();
+void	set_light_pos(t_light *light, vec pos);
+void	set_intensity(t_light *light, double intensity);
+void	set_ambient(t_light *light, double ambient);
 
 #endif
