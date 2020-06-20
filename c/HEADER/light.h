@@ -7,7 +7,6 @@
 typedef struct	s_light
 {
 	vec			pos;
-	vec			light;
 	vec			color;
 	double		intensity;
 	double		ambient;

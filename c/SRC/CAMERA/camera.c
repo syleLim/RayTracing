@@ -1,5 +1,14 @@
 #include "camera.h"
 
+static void	set_vwu(t_camera *camera)
+{
+	vneg(camera->w, camera->dir);
+	vcross(camera->u, camera->up, camera->w);
+	vnormalize(camera->u);
+	vcross(camera->v, camera->w, camera->u);
+	vnormalize(camera->v);
+}
+
 t_camera	*init_camera()
 {
 	t_camera	*camera;
@@ -9,11 +18,7 @@ t_camera	*init_camera()
 	vzero(camera->pos);
 	vmake(camera->dir, -1, 0, 0);
 	vmake(camera->up, 0, 0, 1);
-	vneg(camera->w, camera->dir);
-	vcross(camera->u, camera->up, camera->w);
-	vnormalize(camera->u);
-	vcross(camera->v, camera->w, camera->u);
-	vnormalize(camera->v);
+	set_vwu(camera);
 	camera->fov = INIT_FOV * PI / 180.;
 	return (camera);	
 }
@@ -31,8 +36,12 @@ void		set_camera_fov(t_camera *camera, double fov)
 void		camera_rotate(t_camera *camera, vec orientaion)
 {
 	vrotate(camera->dir, orientaion);
+	vnormalize(camera->dir);
 	vrotate(camera->w, orientaion);
+	vnormalize(camera->w);
 	vrotate(camera->v, orientaion);
+	vnormalize(camera->v);
 	vrotate(camera->u, orientaion);
+	vnormalize(camera->u);
 }
 

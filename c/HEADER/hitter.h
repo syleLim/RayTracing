@@ -6,11 +6,16 @@
 
 typedef struct	s_hitter
 {
+	bool		is_hit;
 	vec			pos;
+	vec			normal;
 	vec			shadow;
 }				t_hitter;
 
 t_hitter	*init_hitter();
 void		set_hitter_pos(t_hitter *hitter, vec pos);
 void		set_hitter_shadow_ray(t_hitter *hitter, vec shadow);
+bool		check_hitter(t_hitter *hitter, vec pos,
+							vec origin, vec normal);
+
 #endif

@@ -16,7 +16,10 @@ double	vlen(vec v);
 void	vmultiple(vec dest, vec src, double value);
 void	vnormalize(vec v);
 void	vneg(vec dest, vec src);
-double	vmultiply(vec v1, vec v2);
+double	vdot(vec v1, vec v2);
 void	vrotate(vec v, vec cos);
+double	vdiff(vec v1, vec v2);
+double	vsubtract(vec dest, vec v1, vec v2);
+void	vpoint(vec dest, vec origin, vec dir, double t);
 
 #endif
