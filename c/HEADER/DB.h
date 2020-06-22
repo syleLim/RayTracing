@@ -18,6 +18,8 @@
 # define SPHERE 0
 # define PLANE 1
 
+# define MAXOBJECT 100
+
 typedef int	bool;
 
 #endif

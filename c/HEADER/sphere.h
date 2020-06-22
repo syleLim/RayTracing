@@ -4,7 +4,6 @@
 # include "vector.h"
 # include "ray.h"
 # include "hitter.h"
-# include <math.h>
 
 typedef struct	s_sphere
 {

@@ -57,14 +57,28 @@ void			vmultiple(vec dest, vec src, double value)
 	dest[Z] = src[Z] * value;
 }
 
-double			vsubtract(vec dest, vec v1, vec v2)
+void			vmultiply(vec dest, vec v1, vec v2)
+{
+	dest[X] = v1[X] * v2[X];
+	dest[Y] = v1[Y] * v2[Y];
+	dest[Z] = v1[Z] * v2[Z];
+}
+
+void			vsubtract(vec dest, vec v1, vec v2)
 {
 	dest[X] = v1[X] - v2[X];
 	dest[Y] = v1[Y] - v2[Y];
 	dest[Z] = v1[Z] - v2[Z];
 }
 
-double	vdot(vec v1, vec v2)
+void			vadd(vec dest, vec v1, vec v2)
+{
+	dest[X] = v1[X] + v2[X];
+	dest[Y] = v1[Y] + v2[Y];
+	dest[Z] = v1[Z] + v2[Z];
+}
+
+double			vdot(vec v1, vec v2)
 {
 	return (v1[X] * v2[X] + v1[Y] * v2[Y] + v1[Z] * v2[Z]);
 }

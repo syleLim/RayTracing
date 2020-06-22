@@ -9,6 +9,7 @@ t_sphere	*init_sphere()
 	sphere->radius = 1;
 	vzero(sphere->pos);
 	vmake(sphere->color, 1, 1, 1);
+	return (sphere);
 }
 
 void		set_sphere_radius(t_sphere *sphere, double radius)
@@ -61,8 +62,8 @@ static bool	collision(vec pos, t_sphere *sphere,
 	return (TRUE);
 }
 
-void		collision_sphere(t_sphere *sphere, t_ray *ray,
-								 t_hitter *hitter)
+void		collision_sphere(t_sphere *sphere,
+						t_ray *ray, t_hitter *hitter)
 {
 	vec pos;
 	vec normal;
@@ -70,6 +71,8 @@ void		collision_sphere(t_sphere *sphere, t_ray *ray,
 	if (collision(pos, sphere, ray->origin, ray->dir))
 	{
 		vsubtract(normal, pos, sphere->pos);
-		check_hitter(hitter, pos, ray->origin, normal);
+		vnormalize(normal);
+		if (check_hitter(hitter, pos, ray->origin, normal))
+			set_hitter_color(hitter, sphere->color);
 	}
 }
