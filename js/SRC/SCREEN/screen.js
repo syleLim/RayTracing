@@ -15,7 +15,7 @@ module.exports = class Screen {
 
 	setScreen(fov, w, u, v, pos) {
 		const sw = Math.tan(fov / 2);
-		const sh = w * this.height / this.width;	
+		const sh = sw * this.height / this.width;	
 		this.origin = subVector(
 			subVector(
 				subVector(pos, mulVector(u, sw)), mulVector(v, sh)),
