@@ -25,4 +25,20 @@ module.exports = class Light {
 	setAmbient(r, g, b, ratio) {
 		this.ambient.set(ratio * r / 256 , ratio * g / 256, ratio * b / 256);
 	}
+
+	getDiffuse(hitter, l) {
+		//const l = subVector(this.pos, hitter.pos).norm();
+		const m = Math.max(l.dot(hitter.normal), 0);
+		return multiplyVector(mulVector(this.color, m, this.intensity),
+					hitter.color);
+	}
+
+	getSpecular(hitter, l) {
+		const r = mulVector(hitter.normal, 2 * hitter.normal.dot(l))
+					.sub(l);
+		const v = subVector(hitter.pos, hitter.origin).norm();
+		const m = Math.max(r.dot(v), 0);
+		return multiplyVector(mulVector(this.color, m * this.intensity),
+					hitter.color)
+	}
 }

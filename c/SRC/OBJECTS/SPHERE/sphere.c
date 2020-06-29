@@ -43,10 +43,10 @@ static double	equation(t_sphere *sphere,
 	discriminant = b * b - a * c;
 	if (discriminant < 0)
 		return (-1);
-	if ((-b - sqrt(b * b - a * c)) / a > 0)
-		return ((-b - sqrt(b * b - a * c)) / a);
-	if ((-b + sqrt(b * b - a * c)) / a > 0)
-		return ((-b + sqrt(b * b - a * c)) / a);
+	if ((-b - sqrt(discriminant)) / a > 0)
+		return ((-b - sqrt(discriminant)) / a);
+	if ((-b + sqrt(discriminant)) / a > 0)
+		return ((-b + sqrt(discriminant)) / a);
 	return (-1);
 }
 

@@ -1,5 +1,5 @@
 const addVector = (v1, v2) => 
-	new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v1.z);
+	new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 
 const subVector = (v1, v2) => 
 	new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
@@ -40,7 +40,7 @@ const getRot = (before, after) => {
 }
 
 class Vector {
-	constructor(x, y, z) {
+	constructor(x = 0, y = 0, z = 0) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -107,6 +107,13 @@ class Vector {
 		this.y = temp[1];
 		this.z = temp[2];
 		return (this);
+	}
+
+	map(callback) {
+		const x = callback(this.x);
+		const y = callback(this.y);
+		const z = callback(this.z);
+		return new Vector(x, y, z);
 	}
 }
 

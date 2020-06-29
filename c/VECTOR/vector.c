@@ -83,12 +83,9 @@ double			vdot(vec v1, vec v2)
 	return (v1[X] * v2[X] + v1[Y] * v2[Y] + v1[Z] * v2[Z]);
 }
 
-static void		get_axis(vec axis, vec ori)
+static void		get_axis(vec axis, vec v, vec ori)
 {
-	vec basic;
-
-	vmake(basic, 0, 0, 1);
-	vcross(axis, basic, ori);
+	vcross(axis, v, ori);
 }
 
 static double	get_cos(vec v1, vec v2)
@@ -111,8 +108,8 @@ void			vrotate(vec v, vec ori)
 	double	c;
 	double	s;
 
-	get_axis(axis, ori);
-	c = get_cos(axis, ori);
+	get_axis(axis, v, ori);
+	c = get_cos(v, ori);
 	s = sqrt(1 - c * c);
 	vmake(rot[0], axis[X] * axis[X] * (1 - c) + c,
 					axis[X] * axis[Y] * (1 - c) + axis[Z] * s,

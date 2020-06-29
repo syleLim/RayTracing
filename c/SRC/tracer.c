@@ -23,5 +23,4 @@ void	tracing(t_objs *objs, t_light *light,
 			//TODO : set color in screen
 		}
 	}
-	
 }

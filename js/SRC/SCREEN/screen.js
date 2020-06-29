@@ -6,6 +6,7 @@ module.exports = class Screen {
 	constructor () {
 		this.width = 640;
 		this.height = 480;
+		this.map = [];
 	}
 
 	setWidth (width, height) {
@@ -22,5 +23,26 @@ module.exports = class Screen {
 			w);
 		this.horizontal = mulVector(u, 2 * sw);
 		this.vertical = mulVector(v, 2 * sh);
+	}
+
+	getColoring(hitter, light) {
+		const l = subVector(light.pos, hitter.pos).norm();
+		const diffuse = light.getDiffuse(hitter, l);
+		const specular = light.getSpecular(hitter, l);
+		const color = addVector(diffuse, specular).map(e => {
+			if (e > 1) 
+				return 1;
+			else
+				return e;
+		});
+		return {r : color.x * 255 ,
+			g : color.y * 255,
+			b : color.z * 255, a : 255};
+	}
+
+	setView(hitter, light, i, j) {
+		if (hitter.isHit)
+			this.map.push({x : j, y : i,
+					color : this.getColoring(hitter, light)});
 	}
 }
