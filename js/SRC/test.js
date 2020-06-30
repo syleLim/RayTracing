@@ -3,13 +3,19 @@ const { Vector, addVector, subVector,
 	multiplyVector, getRot } = require("../LIB/vector")
 const Camera = require("./CAMERA/camera");
 const Sphere = require("./OBJECTS/shpere");
+const Plane = require("./OBJECTS/plane")
 const Light = require("./LIGHT/light");
 
 const camera = new Camera();
 const sphere = new Sphere();
+const plane  = new Plane();
 
 sphere.setPos(-4, 0, 0);
-const objs = [sphere];
+plane.setPos(-5, 0, 0);
+plane.rotate(new Vector(-1, 0, 0));
+const objs = [plane, sphere];
+
+
 const light = new Light();
 light.setPos(-4, 0, 4);
 
