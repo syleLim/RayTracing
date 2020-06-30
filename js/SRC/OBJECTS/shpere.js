@@ -17,10 +17,10 @@ module.exports = class Sphere extends Object {
 
 		if (discriminant < 0)
 			return (-1);
-		value = -b - Math.sqrt(discriminant);
+		value = (-b - Math.sqrt(discriminant)) / a;
 		if (value > 0)
 			return (value);
-		value = -b + Math.sqrt(discriminant);
+		value = (-b + Math.sqrt(discriminant)) / a;
 		if (value > 0)
 			return (value);
 		return (-1);

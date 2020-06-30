@@ -35,9 +35,9 @@ module.exports = class Screen {
 			else
 				return e;
 		});
-		return {r : color.x * 255 ,
-			g : color.y * 255,
-			b : color.z * 255, a : 255};
+		return {r : color.x * 254 ,
+			g : color.y * 254,
+			b : color.z * 254, a : 255};
 	}
 
 	setView(hitter, light, i, j) {

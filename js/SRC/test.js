@@ -8,11 +8,16 @@ const Light = require("./LIGHT/light");
 const camera = new Camera();
 const sphere = new Sphere();
 
-sphere.setPos(-3, 0, 0);
+sphere.setPos(-4, 0, 0);
 const objs = [sphere];
 const light = new Light();
+light.setPos(-4, 0, 4);
 
 camera.setCasting(objs, light);
+
+// console.log(camera);
+// console.log(light);
+// console.log(objs[0]);
 
 //console.log(camera.screen.map);
 const { createCanvas, createImageData, Image } = require("canvas");
@@ -28,6 +33,8 @@ camera.screen.map.forEach(({x, y, color}) => {
 	image.data[index + 1] = color.g;
 	image.data[index + 2] = color.b;
 	image.data[index + 3] = color.a;
+	//console.log(x, y, color);
+	
 })
 
 

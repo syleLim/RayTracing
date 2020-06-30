@@ -27,8 +27,7 @@ module.exports = class Light {
 	}
 
 	getDiffuse(hitter, l) {
-		//const l = subVector(this.pos, hitter.pos).norm();
-		const m = Math.max(l.dot(hitter.normal), 0);
+		const m = Math.max(hitter.normal.dot(l), 0);
 		return multiplyVector(mulVector(this.color, m, this.intensity),
 					hitter.color);
 	}
@@ -36,7 +35,7 @@ module.exports = class Light {
 	getSpecular(hitter, l) {
 		const r = mulVector(hitter.normal, 2 * hitter.normal.dot(l))
 					.sub(l);
-		const v = subVector(hitter.pos, hitter.origin).norm();
+		const v = subVector(hitter.origin, hitter.pos).norm();
 		const m = Math.max(r.dot(v), 0);
 		return multiplyVector(mulVector(this.color, m * this.intensity),
 					hitter.color)
