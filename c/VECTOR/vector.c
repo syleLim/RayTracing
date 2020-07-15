@@ -86,6 +86,7 @@ double			vdot(vec v1, vec v2)
 static void		get_axis(vec axis, vec v, vec ori)
 {
 	vcross(axis, v, ori);
+	vnormalize(axis);
 }
 
 static double	get_cos(vec v1, vec v2)
@@ -100,30 +101,45 @@ double			vdiff(vec v1, vec v2)
 				+ pow(v1[Z] - v2[Z], 2)));
 }
 
-void			vrotate(vec v, vec ori)
+void			vscaling(vec dest, vec src)
 {
-	vec		rot[3];
-	vec		axis;
-	vec		temp;
-	double	c;
-	double	s;
+	
+}
 
-	get_axis(axis, v, ori);
-	c = get_cos(v, ori);
-	s = sqrt(1 - c * c);
-	vmake(rot[0], axis[X] * axis[X] * (1 - c) + c,
-					axis[X] * axis[Y] * (1 - c) + axis[Z] * s,
-					axis[X] * axis[Z] * (1 - c) - axis[Y] * s);
-	vmake(rot[1], axis[X] * axis[Y] * (1 - c) - axis[Z] * s,
-					axis[Y] * axis[Y] * (1 - c) + c,
-					axis[Y] * axis[Z] * (1 - c) - axis[X] * s);
-	vmake(rot[2], axis[X] * axis[Z] * (1 - c) + axis[Y] * s,
-					axis[Y] * axis[Z] * (1 - c) - axis[X] * s,
-					axis[Z] * axis[Z] * (1 - c) + c);
-	temp[X] = vdot(v, rot[0]);
-	temp[Y] = vdot(v, rot[1]);
-	temp[Z] = vdot(v, rot[2]);
-	vcopy(v, temp);		
+bool			vcompare(vec v1, vec v2)
+{
+	if (v1[X] != v2[X] || v1[Y] != v2[Y] || v1[Z] != v2[Z])
+		return (FALSE);
+	return (TRUE);
+}
+
+bool			vcompare_neg(vec v1, vec v2)
+{
+	if (v1[X] != -v2[X] || v1[Y] != -v2[Y] || v1[Z] != -v2[Z])
+		return (FALSE);
+	return (TRUE);
+}
+
+void			vrotate(vec v, vec u, vec ori)
+{
+	vec half;
+	vec cross;
+	quaternion q;
+
+	vnormalize(u);
+	vnormalize(ori);
+	if (vcompare(u, ori))
+		return ;
+	if (vcompare_neg(u, ori))
+		qorthogonal(q, u);
+	else
+	{
+		vadd(half, u, ori);
+		vnormalize(half);
+		vcross(cross, u, half);
+		qmake(q, cross, vdot(u, half));
+	}
+	qrotate(v, q);
 }
 
 void	vpoint(vec dest, vec origin, vec dir, double t)

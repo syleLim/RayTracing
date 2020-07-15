@@ -35,13 +35,14 @@ void		set_camera_fov(t_camera *camera, double fov)
 
 void		camera_rotate(t_camera *camera, vec orientaion)
 {
-	vrotate(camera->dir, orientaion);
+	vrotate(camera->dir, camera->up, orientaion);
 	vnormalize(camera->dir);
-	vrotate(camera->w, orientaion);
+	vrotate(camera->w, camera->up, orientaion);
 	vnormalize(camera->w);
-	vrotate(camera->v, orientaion);
+	vrotate(camera->v, camera->up, orientaion);
 	vnormalize(camera->v);
-	vrotate(camera->u, orientaion);
+	vrotate(camera->u, camera->up, orientaion);
 	vnormalize(camera->u);
+	vcopy(camera->up, orientaion);
 }
 

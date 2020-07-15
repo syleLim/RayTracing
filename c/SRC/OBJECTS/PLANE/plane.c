@@ -6,6 +6,7 @@ t_plane		*init_plane()
 
 	if (!(plane = malloc(sizeof(t_plane))))
 		return (NULL);
+	plane->id = -1;
 	vzero(plane->point);
 	vmake(plane->normal, 0, 0, 1);
 	vmake(plane->color, 1, 1, 1);
@@ -58,6 +59,16 @@ void		collision_plane(t_plane *plane,
 
 	if (collision(pos, plane, ray->origin, ray->dir))
 		if (check_hitter(hitter, pos, ray->origin, plane->normal))
-			set_hitter_color(hitter, plane->color);
+			set_hitter_color(hitter, plane->color, plane->id);
 }
 
+void		shadow_collision_plane(t_plane *plane,
+						t_ray *ray, t_hitter *hitter)
+{
+	vec temp;
+
+	if (plane->id == hitter->obj_id)
+		return;
+	if (collision(temp, plane, ray->origin, ray->dir))
+		hitter->is_hit = TRUE;
+}

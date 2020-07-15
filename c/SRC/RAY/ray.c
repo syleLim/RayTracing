@@ -22,8 +22,13 @@ void	set_ray_dir(t_ray *ray, vec dir)
 }
 
 void	cal_ray_dir(t_ray *ray,
-				t_screen *screen, double v, double u)
+				t_screen *screen, double i, double j)
 {
+	double v;
+	double u;
+
+	v = i / (double)screen->height;
+	u = j / (double)screen->width;
 	ray->dir[X] = screen->origin[X]
 		+ u * screen->horizontal[X] + v * screen->vertical[X];
 	ray->dir[Y] = screen->origin[Y]

@@ -12,7 +12,6 @@ typedef	struct	s_camera
 	vec			v;
 	vec			u;
 	vec			w;
-	vec			orientaion;
 	double		fov;
 }				t_camera;
 

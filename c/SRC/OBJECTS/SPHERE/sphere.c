@@ -6,6 +6,7 @@ t_sphere	*init_sphere()
 
 	if (!(sphere = malloc(sizeof(t_sphere))))
 		return (NULL);
+	sphere->id = -1;
 	sphere->radius = 1;
 	vzero(sphere->pos);
 	vmake(sphere->color, 1, 1, 1);
@@ -56,6 +57,7 @@ static bool	collision(vec pos, t_sphere *sphere,
 	double t;
 
 	t = equation(sphere, origin, dir);
+	//printf("t : %.3f\n", t);
 	if (t < 0)
 		return (FALSE);
 	vpoint(pos, origin, dir, t);
@@ -73,6 +75,17 @@ void		collision_sphere(t_sphere *sphere,
 		vsubtract(normal, pos, sphere->pos);
 		vnormalize(normal);
 		if (check_hitter(hitter, pos, ray->origin, normal))
-			set_hitter_color(hitter, sphere->color);
+			set_hitter_color(hitter, sphere->color, sphere->id);
 	}
+}
+
+void		shadow_collision_sphere(t_sphere *sphere,
+							t_ray *ray, t_hitter *hitter)
+{
+	vec temp;
+
+	if (sphere->id == hitter->obj_id)
+		return;
+	if (collision(temp, sphere, ray->origin, ray->dir))
+		hitter->is_hit = TRUE;
 }

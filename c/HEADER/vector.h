@@ -3,6 +3,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include "DB.h"
+# include "quaternion.h"
 
 typedef double	vec[3];
 
@@ -18,7 +19,7 @@ void	vmultiply(vec dest, vec v1, vec v2);
 void	vnormalize(vec v);
 void	vneg(vec dest, vec src);
 double	vdot(vec v1, vec v2);
-void	vrotate(vec v, vec cos);
+void	vrotate(vec v, vec u, vec ori);
 double	vdiff(vec v1, vec v2);
 void	vsubtract(vec dest, vec v1, vec v2);
 void	vpoint(vec dest, vec origin, vec dir, double t);

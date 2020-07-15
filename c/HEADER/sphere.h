@@ -7,6 +7,7 @@
 
 typedef struct	s_sphere
 {
+	int			id;
 	vec			pos;
 	vec			color;
 	double		radius;
@@ -18,4 +19,6 @@ void		set_sphere_radius(t_sphere *sphere, double radius);
 void		set_sphere_color(t_sphere *sphere, vec color);
 void		collision_sphere(t_sphere *sphere, t_ray *ray,
 								 t_hitter *hitter);
+void		shadow_collision_sphere(t_sphere *sphere,
+							t_ray *ray, t_hitter *hitter);
 #endif
