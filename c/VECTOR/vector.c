@@ -101,11 +101,6 @@ double			vdiff(vec v1, vec v2)
 				+ pow(v1[Z] - v2[Z], 2)));
 }
 
-void			vscaling(vec dest, vec src)
-{
-	
-}
-
 bool			vcompare(vec v1, vec v2)
 {
 	if (v1[X] != v2[X] || v1[Y] != v2[Y] || v1[Z] != v2[Z])

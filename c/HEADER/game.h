@@ -5,6 +5,7 @@
 
 typedef struct		s_game
 {
+	int				camera_id;
 	t_components	*components;
 	t_objs			*objs;
 }					t_game;

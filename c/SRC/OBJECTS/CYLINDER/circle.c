@@ -56,7 +56,7 @@ static bool		check_inside(vec pos, t_circle *circle)
 	return (FALSE);
 }
 
-static bool		collision(vec pos, t_circle *circle,
+static bool	collision(vec pos, t_circle *circle,
 								vec origin, vec dir)
 {
 	double	t;

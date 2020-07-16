@@ -182,9 +182,13 @@ void			shadow_collision_cylinder(t_cylinder *cylinder,
 							t_ray *ray, t_hitter *hitter)
 {
 	vec temp;
+	int	i;
 
 	if (cylinder->id == hitter->obj_id)
 		return;
+	i = -1;
+	while (++i < 2)
+		shadow_collision_circle(cylinder->circles[i], ray, hitter);
 	if (collision(temp, cylinder, ray->origin, ray->dir))
 		hitter->is_hit = TRUE;
 }

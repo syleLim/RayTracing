@@ -1,8 +1,9 @@
 #ifndef TRACER_H
 # define TRACER_H
 # include "parser.h"
+# include "lighting.h"
 
-void	tracing(t_objs *objs, t_light *light,
-					t_screen *screen, t_window *window);
+void	tracing(t_objs *objs, t_components *comp,
+				int camera_id);
 
 #endif

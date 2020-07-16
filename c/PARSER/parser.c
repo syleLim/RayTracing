@@ -7,11 +7,11 @@ static bool	set_components(t_components *comp, char **info)
 	if (!ft_strcmp(info[0], "R"))
 		return (parsing_window(comp, info));
 	if (!ft_strcmp(info[0], "A"))
-		return (parsing_ambient(comp->light, info));
+		return (parsing_ambient(comp->ambient, info));
 	if (!ft_strcmp(info[0], "c"))
 		return (parsing_camera(comp, info));
 	if (!ft_strcmp(info[0], "l"))
-		return (parsing_light(comp->light, info));
+		return (parsing_light(comp, info));
 	return (FALSE);
 }
 

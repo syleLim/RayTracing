@@ -1,47 +1,43 @@
 #include "tracer.h"
 #include "shadow.h"
 
-int		coloring(vec color)
+void	clear_window(int *data, int width, int height)
 {
-	int r;
-	int g;
-	int b;
+	int i;
 
-	r = (int)(color[X] * 255);
-	g = (int)(color[Y] * 255);
-	b = (int)(color[Z] * 255);
-	return (r * 256 * 256 + g * 256 + b);
+	i = -1;
+	while (++i < width * height)
+		data[i] = 0x000000;
 }
 
-void	tracing(t_objs *objs, t_light *light,
-					t_screen *screen, t_window *window)
+void	tracing(t_objs *objs, t_components *comp, int camera_id)
 {
 	t_hitter	*hitter;
 	t_ray		*ray;
-	vec			color;
 	int 		i;
 	int 		j;
 
 	hitter = init_hitter();
 	ray = init_ray();
 	i = -1;
-	while (++i < screen->height)
+	clear_window(comp->window->data,
+		comp->window->width, comp->window->height);
+	while (++i < comp->screens[camera_id]->height)
 	{		
 		j = -1;
-		while (++j < screen->width)
+		while (++j < comp->screens[camera_id]->width)
 		{
-			cal_ray_dir(ray, screen, i, j);
+			cal_ray_dir(ray, comp->screens[camera_id], i, j);
 			objs_collision(objs, ray, hitter);
 			if (hitter->is_hit)
 			{
-				check_shadow(objs, hitter, light);
-				set_color(color, light, hitter, ray->origin);
-				window->data[i * window->width + j] = coloring(color);
+				comp->window->data[i * comp->window->width + j]
+				= set_color(objs, comp, hitter, ray->origin);
 			}
 		}
 	}
-	mlx_put_image_to_window(window->mlx, window->window,
-								window->img, 0, 0);
+	mlx_put_image_to_window(comp->window->mlx,
+		comp->window->window, comp->window->img, 0, 0);
 	free(hitter);
 	free(ray);
 }

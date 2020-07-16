@@ -1,37 +1,46 @@
 # include "tracer.h"
-# include <fcntl.h>
-# include <unistd.h>
+# include "export.h"
+
 t_game	*init_game()
 {
 	t_game	*game;
 
 	if(!(game = malloc(sizeof(t_game))))
 		exit(1);
+	game->camera_id = 0;
 	game->components = init_components();
 	game->objs = init_objs();
 	return (game);
 }
 
+
+
 void ft_printf(t_game *game)
 {
 	t_window *w = game->components->window;
-	t_camera *c = game->components->camera;
 	//t_screen *s = game->components->screen;
-	t_light *l = game->components->light;
-
 	printf("====componentest====\n");
 	printf("window : \n");
 	printf("\tsize : %d, %d\n", w->width, w->height);
-	printf("camera : \n");
-	printv("\tpos : ", c->pos);
-	printv("\tdir : ", c->dir);
-	printv("\tori : ", c->up);
-	printf("\tfov : %.3f\n", c->fov);
-	printf("light :");
-	printv("\tpos :", l->pos);
-	printv("\tcolor :", l->color);
-	printv("\tambi :", l->ambient);
-
+	int i = -1;
+	while (++i < game->components->camera_nums)
+	{
+		t_camera *c = game->components->cameras[i];
+		printf("camera - %d : \n", i);
+		printv("\tpos : ", c->pos);
+		printv("\tdir : ", c->dir);
+		printv("\tori : ", c->up);
+		printf("\tfov : %.3f\n", c->fov);
+	}
+	i = -1;
+	while (++i < game->components->light_nums)
+	{
+		t_light *l = game->components->lights[i];
+		printf("light - %d :", i);
+		printv("\tpos :", l->pos);
+		printv("\tcolor :", l->color);
+	}
+	printv("\tambient : ", game->components->ambient);
 	t_sphere *sp = game->objs->spheres[0];
 	t_plane *p = game->objs->planes[0];
 	t_square *sq = game->objs->squares[0];
@@ -65,21 +74,48 @@ void ft_printf(t_game *game)
 	printv("\tcolor : ", t->color);
 }
 
-int main()
+int exit_event()
+{
+	exit(0);
+}
+
+int	key_event(int key, t_game *game)
+{
+	if (key == ESC)
+		exit(0);
+	if ((key == ONE || key == TWO || key == THREE || key == FOUR)
+		&& key - 18 < game->components->camera_nums)
+		game->camera_id = key - 18;
+	tracing(game->objs,
+		 game->components,
+		 game->camera_id);
+	return (TRUE);
+}
+
+int expose_event()
+{
+	printf("work?\n");
+	return (TRUE);
+}
+
+int main(int argc, char *argv[])
 {
 	int		fd;
 	t_game	*game;
 
 	game = init_game();
 	fd = open("./DB/map.rt", O_RDONLY);
-	
 	parsing(fd, game->objs, game->components);
-
-	
 	//ft_printf(game);
 	tracing(game->objs,
-		 game->components->light,
-		game->components->screen,
-		game->components->window);
-	mlx_loop(game->components->window->mlx);
+		 game->components,
+		 game->camera_id);
+	if (argc == 1)
+	{
+		mlx_key_hook(game->components->window->window, &key_event, game);
+		mlx_hook(game->components->window->window, 17, 0, &exit_event, game);
+		mlx_loop(game->components->window->mlx);
+	}
+	else
+		export_bmp("test.bmp", game->components->window);
 }

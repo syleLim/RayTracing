@@ -23,14 +23,14 @@ void		set_screen_vector(t_screen *screen, t_camera *camera)
 	vmultiple(screen->vertical, camera->v, 2. * h);
 }
 
-t_screen	*init_screen(t_camera *camera)
+t_screen	*init_screen(t_camera *camera, int w, int h)
 {
 	t_screen	*screen;
 
 	if (!(screen = malloc(sizeof(t_screen))))
 		return (NULL);
-	screen->width = INIT_W;
-	screen->height = INIT_H;
+	screen->width = w;
+	screen->height = h;
 	set_screen_vector(screen, camera);
 	return (screen);
 }

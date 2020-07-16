@@ -18,9 +18,9 @@ int 	parsing_sphere(t_objs *objs, char **info);
 int 	parsing_square(t_objs *objs, char **info);
 int 	parsing_cylinder(t_objs *objs, char **info);
 int 	parsing_plane(t_objs *objs, char **info);
-int 	parsing_light(t_light *light, char **info);
+int 	parsing_light(t_components *comp, char **info);
 int 	parsing_camera(t_components *comp, char **info);
-int 	parsing_ambient(t_light *light, char **info);
+int 	parsing_ambient(vec ambient, char **info);
 int 	parsing_window(t_components *components, char **info);
 void    parsing(int fd, t_objs *objs, t_components *comp);
 #endif
