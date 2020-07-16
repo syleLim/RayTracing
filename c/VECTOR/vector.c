@@ -127,6 +127,10 @@ void			vrotate(vec v, vec u, vec ori)
 		return ;
 	if (vcompare_neg(u, ori))
 		qorthogonal(q, u);
+	vcross(cross, u, ori);
+	vnormalize(cross);
+	if (vcompare(v, cross) || vcompare_neg(v, cross))
+		return ;
 	else
 	{
 		vadd(half, u, ori);
