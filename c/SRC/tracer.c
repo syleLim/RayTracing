@@ -19,6 +19,7 @@ void	tracing(t_objs *objs, t_components *comp, int camera_id)
 
 	hitter = init_hitter();
 	ray = init_ray();
+	set_ray_origin(ray, comp->cameras[camera_id]->pos);
 	i = -1;
 	clear_window(comp->window->data,
 		comp->window->width, comp->window->height);

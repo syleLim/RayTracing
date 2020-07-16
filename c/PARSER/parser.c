@@ -58,4 +58,7 @@ void		parsing(int fd, t_objs *objs, t_components *comp)
 		free(line);
 		line = NULL;
 	}
+	if (*line != 0)
+		specifier(comp, objs, line);
+	free(line);
 }

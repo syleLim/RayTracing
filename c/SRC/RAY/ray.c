@@ -30,9 +30,9 @@ void	cal_ray_dir(t_ray *ray,
 	v = i / (double)screen->height;
 	u = j / (double)screen->width;
 	ray->dir[X] = screen->origin[X]
-		+ u * screen->horizontal[X] + v * screen->vertical[X];
+		+ u * screen->horizontal[X] + v * screen->vertical[X] - ray->origin[X];
 	ray->dir[Y] = screen->origin[Y]
-		+ u * screen->horizontal[Y] + v * screen->vertical[Y];
+		+ u * screen->horizontal[Y] + v * screen->vertical[Y] - ray->origin[Y];;
 	ray->dir[Z] = screen->origin[Z]
-		+ u * screen->horizontal[Z] + v * screen->vertical[Z];
+		+ u * screen->horizontal[Z] + v * screen->vertical[Z] - ray->origin[Z];;
 }

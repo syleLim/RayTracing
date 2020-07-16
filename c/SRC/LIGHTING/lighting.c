@@ -3,35 +3,42 @@
 static void	get_diffuse(vec diffuse, t_light *light,
 						t_hitter *hitter)
 {
+	vec		pre;
 	vec		l;
 	double	a;
 
+	vcopy(pre, light->color);
 	vsubtract(l, light->pos, hitter->pos);
+	vmultiple(light->color, light->color, 1 / vlen(l));
 	vnormalize(l);
 	a = fmax(vdot(l, hitter->normal), 0.);
 	vmultiple(diffuse, light->color, a);
 	vmultiply(diffuse, diffuse, hitter->color);
+	vcopy(light->color, pre);
 }
 
 static void	get_specular(vec specular, t_light *light,
 						t_hitter *hitter, vec origin)
 {
+	vec		pre;
 	vec		l;
 	vec		r;
 	vec		v;
-	vec		temp;
 	double	a;
 
+	vcopy(pre, light->color);
 	vsubtract(l, light->pos, hitter->pos);
+	vmultiple(light->color, light->color, 30 / vlen(l));
 	vnormalize(l);
-	vmultiple(temp, hitter->normal,
+	vmultiple(specular, hitter->normal,
 				2. * vdot(hitter->normal, l));
-	vsubtract(r, temp, l);
+	vsubtract(r, specular, l);
 	vsubtract(v, origin, hitter->pos);
 	vnormalize(v);
 	a = fmax(vdot(r, v), 0);
-	vmultiple(temp, light->color, a);
-	vmultiply(specular, temp, hitter->color);	
+	vmultiple(specular, light->color, a);
+	vmultiply(specular, specular, hitter->color);
+	vcopy(light->color, pre);
 }
 
 static void	color_check(vec color)

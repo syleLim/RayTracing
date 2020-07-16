@@ -6,7 +6,6 @@ static void	set_vwu(t_camera *camera)
 	vcross(camera->u, camera->up, camera->w);
 	vnormalize(camera->u);
 	vcross(camera->v, camera->w, camera->u);
-	vnormalize(camera->v);
 }
 
 t_camera	*init_camera()
@@ -37,12 +36,7 @@ void		camera_rotate(t_camera *camera, vec orientaion)
 {
 	vrotate(camera->dir, camera->up, orientaion);
 	vnormalize(camera->dir);
-	vrotate(camera->w, camera->up, orientaion);
-	vnormalize(camera->w);
-	vrotate(camera->v, camera->up, orientaion);
-	vnormalize(camera->v);
-	vrotate(camera->u, camera->up, orientaion);
-	vnormalize(camera->u);
 	vcopy(camera->up, orientaion);
+	set_vwu(camera);
 }
 

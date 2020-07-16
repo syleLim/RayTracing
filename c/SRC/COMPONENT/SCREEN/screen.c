@@ -15,9 +15,9 @@ void		set_screen_vector(t_screen *screen, t_camera *camera)
 {
 	double	w;
 	double	h;
-	
+
 	w = tan(camera->fov / 2);
-	h = w * (double)screen->height / (double)screen-> width;
+	h = w * (double)screen->height / (double)screen->width;
 	set_origin(screen->origin, w, h, camera);
 	vmultiple(screen->horizontal, camera->u, 2. * w);
 	vmultiple(screen->vertical, camera->v, 2. * h);

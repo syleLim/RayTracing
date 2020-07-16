@@ -13,8 +13,8 @@
 
 # define PI 3.1415926535
 
-# define FORWARD 126
-# define BACK 125
+# define UP 126
+# define DOWN 125
 # define RIGHT 124
 # define LEFT 123
 # define ESC 53
