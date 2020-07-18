@@ -8,7 +8,7 @@ const mulVector = (v, t) =>
 	new Vector(t * v.x, t * v.y, t * v.z);
 
 const dotVector = (v1, v2) => 
-	v1.x * v2.x + v1.y * v2.y * v1.z * v2.z;
+	v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 
 const crossVector = (v1, v2) => 
 	new Vector(v1.y * v2.z - v1.z * v2.y,
@@ -17,6 +17,11 @@ const crossVector = (v1, v2) =>
 
 const  multiplyVector = (v1, v2) => 
 	new Vector(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+
+const normalizeVector = (v) => {
+	const len = v.len();
+	return new Vector(v.x / len, v.y / len, v.z / len);
+}
 
 const getAngle = (v1, v2) => 
 	v1.dot(v2) / (v1.len() * v2.len());
@@ -119,4 +124,4 @@ class Vector {
 
 module.exports =  { Vector ,addVector, subVector, 
 		mulVector, crossVector, dotVector, 
-		multiplyVector, getRot};
+		multiplyVector, getRot, normalizeVector};

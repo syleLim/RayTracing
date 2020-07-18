@@ -13,7 +13,8 @@ const plane  = new Plane();
 sphere.setPos(-4, 0, 0);
 plane.setPos(-5, 0, 0);
 plane.rotate(new Vector(-1, 0, 0));
-const objs = [plane, sphere];
+plane.setColor(0, 0, 255);
+const objs = [sphere, plane];
 
 
 const light = new Light();
