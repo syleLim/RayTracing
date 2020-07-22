@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objs_parsing.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 10:30:13 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 12:06:40 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 int	parsing_sphere(t_objs *objs, char **info)
 {
 	t_sphere	*sphere;
-	vec		 temp;
+	t_vec		temp;
 
 	if (ft_strslen(info) != 4)
-		exit(1);
-	if (!(sphere = init_sphere()))
-		exit(1);
+		error_exit("Error\n\tComponent Loss in Sphere");
+	sphere = init_sphere();
 	parse_vector(temp, info[1], 1);
 	set_sphere_pos(sphere, temp);
 	set_sphere_radius(sphere, ft_atof(info[2]));
@@ -21,12 +32,11 @@ int	parsing_sphere(t_objs *objs, char **info)
 int	parsing_plane(t_objs *objs, char **info)
 {
 	t_plane	*plane;
-	vec		 temp;
+	t_vec	temp;
 
 	if (ft_strslen(info) != 4)
-		exit(1);
-	if (!(plane = init_plane()))
-		exit(1);
+		error_exit("Error\n\tComponent Loss in Plane");
+	plane = init_plane();
 	parse_vector(temp, info[1], 1);
 	set_plane_point(plane, temp);
 	parse_vector(temp, info[2], 1);
@@ -41,12 +51,11 @@ int	parsing_plane(t_objs *objs, char **info)
 int	parsing_square(t_objs *objs, char **info)
 {
 	t_square	*square;
-	vec			temp;
+	t_vec		temp;
 
 	if (ft_strslen(info) != 5)
-		exit(1);
-	if (!(square = init_square()))
-		exit(1);
+		error_exit("Error\n\tComponent Loss in Square");
+	square = init_square();
 	parse_vector(temp, info[1], 1);
 	set_square_pos(square, temp);
 	parse_vector(temp, info[2], 1);
@@ -62,12 +71,11 @@ int	parsing_square(t_objs *objs, char **info)
 int	parsing_cylinder(t_objs *objs, char **info)
 {
 	t_cylinder	*cylinder;
-	vec			temp;
+	t_vec		temp;
 
 	if (ft_strslen(info) != 6)
-		exit(1);
-	if (!(cylinder = init_cylinder()))
-		exit(1);
+		error_exit("Error\n\tComponent Loss in Cylinder");
+	cylinder = init_cylinder();
 	parse_vector(temp, info[1], 1);
 	set_cylinder_pos(cylinder, temp);
 	parse_vector(temp, info[2], 1);
@@ -84,12 +92,11 @@ int	parsing_cylinder(t_objs *objs, char **info)
 int	parsing_triangle(t_objs *objs, char **info)
 {
 	t_triangle	*triangle;
-	vec			temp;
+	t_vec		temp;
 
 	if (ft_strslen(info) != 5)
-		exit(1);
-	if (!(triangle = init_triangle()))
-		exit(1);
+		error_exit("Error\n\tComponent Loss in Triangle");
+	triangle = init_triangle();
 	parse_vector(temp, info[1], 1);
 	set_triangle_point_a(triangle, temp);
 	parse_vector(temp, info[2], 1);

@@ -1,22 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   light.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 08:24:29 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 08:36:05 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "light.h"
 
-t_light		*init_light()
+t_light		*init_light(void)
 {
 	t_light	*light;
 
 	if (!(light = malloc(sizeof(t_light))))
-		return (NULL);
+		error_exit("Malloc Error Occured");
 	vzero(light->pos);
 	vmake(light->color, 1, 1, 1);
 	return (light);
-}
-
-void		set_light_color(t_light *light, vec color)
-{
-	vcopy(light->color, color);
-}
-
-void		set_light_pos(t_light *light, vec pos)
-{
-	vcopy(light->pos, pos);
 }

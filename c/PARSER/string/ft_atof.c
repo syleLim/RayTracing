@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 10:25:44 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 10:26:31 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static double	cal_decimal(char *str, double sign)
 {
-	double  decimal;
-	double  digit;
+	double	decimal;
+	double	digit;
 
 	decimal = 0.;
 	digit = 0.1;
@@ -18,9 +30,9 @@ static double	cal_decimal(char *str, double sign)
 
 double			ft_atof(char *str)
 {
-	double  sign;
-	double  num;
-	char    **int_decimal;
+	double	sign;
+	double	num;
+	char	**int_decimal;
 
 	int_decimal = ft_split(str, '.');
 	sign = *str == '-' ? -1 : 1;
@@ -28,7 +40,7 @@ double			ft_atof(char *str)
 		num = (double)ft_atoi(int_decimal[0]);
 	else
 		num = (double)ft_atoi(int_decimal[0])
-			 + cal_decimal(int_decimal[1], sign);
+			+ cal_decimal(int_decimal[1], sign);
 	free(int_decimal);
 	return (num);
 }

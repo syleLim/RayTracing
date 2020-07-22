@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 10:26:51 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 10:27:13 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static int	pass_isspace(const char *str)
@@ -5,7 +17,7 @@ static int	pass_isspace(const char *str)
 	int i;
 
 	i = 0;
-	while (*(str + i) == 9 || *(str + i) == 10 || *(str + i) == 11 || 
+	while (*(str + i) == 9 || *(str + i) == 10 || *(str + i) == 11 ||
 			*(str + i) == 12 || *(str + i) == 13 || *(str + i) == 32)
 		i++;
 	return (i);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shadow.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 09:57:59 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 12:30:12 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shadow.h"
 
-bool	shadow_collision(t_objs *objs, t_ray *ray, t_hitter *hitter)
+t_bool	shadow_collision(t_objs *objs, t_ray *ray, t_hitter *hitter)
 {
 	int i;
 
@@ -23,12 +35,11 @@ bool	shadow_collision(t_objs *objs, t_ray *ray, t_hitter *hitter)
 }
 
 void	check_shadow(t_objs *objs, t_hitter *hitter,
-								t_light *light)
+						t_light *light)
 {
 	t_ray	*shadow_ray;
-	vec		dir;
-	vec		origin;
-		
+	t_vec	dir;
+
 	shadow_ray = init_ray();
 	set_ray_origin(shadow_ray, hitter->pos);
 	vsubtract(dir, light->pos, hitter->pos);

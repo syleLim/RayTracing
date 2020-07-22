@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 10:27:47 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 10:29:26 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static int	num_words(char const *s, char c)
@@ -29,7 +41,7 @@ static int	word_len(char const *str, char c)
 static void	ft_strncpy(char *dest, char const *str, int n)
 {
 	int i;
-	
+
 	i = -1;
 	while (++i < n)
 		*(dest + i) = *(str + i);

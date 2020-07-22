@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_img.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seolim <seolim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/22 10:04:24 by seolim            #+#    #+#             */
+/*   Updated: 2020/07/22 10:04:40 by seolim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "export.h"
 
-void	ft_bdata(t_window *s, int fd)
+void		ft_bdata(t_window *s, int fd)
 {
 	int				i;
 	int				j;
@@ -24,7 +36,7 @@ void	ft_bdata(t_window *s, int fd)
 	}
 }
 
-void	ft_binfo(t_window *s, int fd)
+void		ft_binfo(t_window *s, int fd)
 {
 	int				n;
 	unsigned char	header[40];
@@ -48,7 +60,7 @@ void	ft_binfo(t_window *s, int fd)
 	write(fd, header, 40);
 }
 
-void	ft_bfile(t_window *s, int fd)
+void		ft_bfile(t_window *s, int fd)
 {
 	int				n;
 	unsigned char	header[14];
